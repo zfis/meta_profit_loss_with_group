@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report 
+            id="test_report_balance_sheet_report"
+            model="profit.loss.group.report.data.meta"
+            string="Balance Sheet Report"
+            report_type="qweb-html"
+            name="meta_profit_loss_with_group.test_balance_sheet_report_document" 
+            file="meta_profit_loss_with_group.test_balance_sheet_report_document"
+            attachment_use="False"
+        />
+
+        <template id="test_balance_sheet_report_document">
+            <t t-call="report.html_container">
+                <t t-call="custom_report.custom_external_layout">
+                    <div class="page">
+                        
+                        <div class="row">
+                            <div class="text-center" style="padding-bottom:50px;">
+                                <h3>Profit and Loss</h3>
+                                <h5><span t-esc="docs[0].start_date"/> To <span t-esc="docs[0].end_date"/></h5>
+                                <!-- <h5>Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/></h5> -->
+                            </div>
+                            
+                        </div>
+                        
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr style="background:#999999">
+                                    <th >Accounts and Groups</th>
+                                    <t t-if="docs[0].display_debit_credit">
+                                        <th >Debit</th>
+                                        <th >Credit</th>
+                                    </t>
+                                    <th >Balance</th>
+                                    <!-- <th >priority</th> -->
+                                    <!-- <th >layer</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="line">
+                                    <t t-if="line.layer_limit &gt; line.layer">
+                                        <t t-if="line.account_id">
+                                            <tr>
+                                                <t t-if="line.layer == 1"><td ><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <t t-if="line.layer == 2"><td style="padding-left:50px;"><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <!-- <t t-if="line.layer == 2">
+                                                    <t t-if="line.group_id"><td style="padding-left:50px;"><b><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                    <t t-else=""><td style="padding-left:50px;"><b><span t-field="line.group_name"/><span t-field="line.account_id"/></b></td></t>
+                                                </t> -->
+                                                <t t-if="line.layer == 3"><td style="padding-left:100px;"><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <t t-if="line.layer == 4"><td style="padding-left:150px;"><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <t t-if="line.layer == 5"><td style="padding-left:200px;"><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <t t-if="line.layer == 6"><td style="padding-left:250px;"><span t-field="line.group_id"/><span t-field="line.account_id"/></td></t>
+                                                <!-- <t t-if="line.layer == 0">
+                                                    <td style="padding-left:50px;"><span t-field="line.group_name"/></td>
+                                                </t> -->
+                                                <t t-if="line.display_debit_credit">
+                                                    <td align="right" ><span t-field="line.debit"/></td>
+                                                    <td align="right" ><span t-field="line.credit"/></td>
+                                                </t>
+                                                <td align="right" ><span t-field="line.balance"/></td>
+                                                <!-- <td><span t-field="line.priority"/></td> -->
+                                                <!-- <td><span t-field="line.layer"/></td> -->
+                                            </tr>
+                                        </t>
+                                        <t t-else="">
+                                            <tr style="background:#f2f2f2">
+                                                <t t-if="line.layer == 1"><td ><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <t t-if="line.layer == 2"><td style="padding-left:50px;"><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <!-- <t t-if="line.layer == 2">
+                                                    <t t-if="line.group_id"><td style="padding-left:50px;"><b><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                    <t t-else=""><td style="padding-left:50px;"><b><span t-field="line.group_name"/><span t-field="line.account_id"/></b></td></t>
+                                                </t> -->
+
+                                                <t t-if="line.layer == 3"><td style="padding-left:100px;"><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <t t-if="line.layer == 4"><td style="padding-left:150px;"><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <t t-if="line.layer == 5"><td style="padding-left:200px;"><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <t t-if="line.layer == 6"><td style="padding-left:250px;"><b><span t-field="line.group_name"/><span t-field="line.group_id"/><span t-field="line.account_id"/></b></td></t>
+                                                <!-- <t t-if="line.layer == 0">
+                                                    <td style="padding-left:50px;"><b><span t-field="line.group_name"/></b></td>
+                                                </t> -->
+                                                <t t-if="line.display_debit_credit">
+                                                    <td align="right" ><b><span t-field="line.debit"/></b></td>
+                                                    <td align="right" ><b><span t-field="line.credit"/></b></td>
+                                                </t>
+                                                <td align="right" ><b><span t-field="line.balance"/></b></td>
+                                                <!-- <td><span t-field="line.priority"/></td> -->
+                                                <!-- <td><span t-field="line.layer"/></td> -->
+                                                
+                                            </tr>
+                                        </t>
+                                    </t>
+                                        
+                                </t>
+                            </tbody>
+                        </table> 
+
+                        <!-- <table class="table table-condensed">
+                            <thead>
+                                <tr style="background:#CDCDCD">
+                                    <th width="50px" >Type</th>
+                                    <th style="padding-left:50px;">Account</th>
+                                    <th align="right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs" t-as="line">
+                                    <t t-if="line.layer == '1'">
+                                        <tr>
+                                            <td width="50px" colspan="2">
+                                                <b><span t-field="line.account_type_name"/></b>
+                                            </td>
+                                            <td align="right">
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="line.layer == '2'">
+                                        <tr>
+                                            <td width="50px" colspan="2" style="padding-left:30px;">
+                                                <b><span t-field="line.account_type_name"/></b>
+                                            </td>
+                                            <td align="right">
+                                                <b><span t-field="line.amount" /></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><br/></td>
+                                            <td><br/></td>
+                                            <td><br/></td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="line.layer == '3'">
+                                        <tr>
+                                            <td width="50px">
+                                                <br/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.account_id" />
+                                            </td>
+                                            <td align="right">
+                                                <span t-field="line.amount" />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table> -->
+                    </div>
+                </t>
+            </t>
+        </template>
+        
+    </data>
+</odoo>

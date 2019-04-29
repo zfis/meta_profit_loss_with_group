@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form view -->
+        <record id="view_test_balance_sheet_report_wizard_form" model="ir.ui.view">
+            <field name="name">profit.loss.group.report.wizard.meta.form</field>
+            <field name="model">profit.loss.group.report.wizard.meta</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Payment Report Wizard">
+                        <group>
+                            <group>
+                                <field name="from_date"/>
+                                <field name="layer_limit"/>
+                                
+                            </group>
+                            <group>
+                                <field name='to_date'/>
+                                <field name="display_debit_credit"/>
+                            </group>
+                        </group>
+                    <footer>
+                        <button string="Execute" type="object" name="done" class="oe_highlight" />
+                        <button string="Close" class="oe_link oe_highlight"  special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        
+        <!-- This action window for configuration -->
+
+        <record model="ir.actions.act_window" id="action_view_test_balance_sheet_report_wizard">
+            <field name="name">Profit Loss Report With Group</field>
+            <field name="res_model">profit.loss.group.report.wizard.meta</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new Configuration
+                </p>
+            </field>
+        </record>
+        <menuitem id='menu_meta_test_balance_sheet_report_wizard' name='Profit and Loss with Group' parent="account.menu_finance_reports" action="action_view_test_balance_sheet_report_wizard"/>
+        
+    </data>
+</odoo>
