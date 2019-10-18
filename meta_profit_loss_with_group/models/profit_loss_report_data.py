@@ -1,7 +1,9 @@
 from odoo import models, fields, api, _
-import odoo.addons.decimal_precision as dp
 from datetime import datetime, timedelta
-from odoo.exceptions import UserError
+from odoo.service import db
+from odoo.models import check_method_name
+from odoo.exceptions import AccessError, UserError
+
 
 
 class ProfitLossGroupReportData(models.TransientModel):
