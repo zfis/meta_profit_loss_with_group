@@ -54,7 +54,7 @@ class ProfitLossGroupReportWizard(models.Model):
     @api.multi
     def done(self):
         # raise UserError(self.number_of_layer)
-        self.env.cr.execute(""" TRUNCATE TABLE test_balance_sheet_report_data_meta; """)
+        self.env.cr.execute(""" TRUNCATE TABLE profit_loss_group_report_data_meta; """)
 
         # account_type_list = ["Receivable","Payable","Bank and Cash","Credit Card","Current Assets","Non-current Assets",
         # "Prepayments","Fixed Assets", "Current Liabilities", "Non-current Liabilities", "Equity", "Current Year Earnings",]
