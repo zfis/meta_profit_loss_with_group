@@ -4,7 +4,7 @@
     "summary": """Apps will create a profit and loss report with multi-level group features.""",
     "description": """Apps will create a profit and loss report with multi-level grouping of different account.""",
     "sequence": 1,
-    "version": '10.0.1.0',
+    "version": '1.0',
     "author": "Metamorphosis",
     'company': 'Metamorphosis Limited',
     'website': 'metamorphosis.com.bd',
