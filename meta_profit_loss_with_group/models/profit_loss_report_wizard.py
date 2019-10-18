@@ -136,8 +136,12 @@ class ProfitLossGroupReportWizard(models.Model):
         cor_group_id = self.env['account.group'].search([['code_prefix','=','5'],['level','=',1]])
         self.data_creation(group_map, account_map, cor_group_id, 1)
 
-        tdb = group_map[inc_group_id.id]['debit'] - group_map[inc_group_id.id]['debit']
-        tcr = group_map[cor_group_id.id]['credit'] - group_map[cor_group_id.id]['credit']
+        #tdb = group_map[inc_group_id.id]['debit'] - group_map[inc_group_id.id]['debit']
+       # tcr = group_map[cor_group_id.id]['credit'] - group_map[cor_group_id.id]['credit']
+
+        tdb = group_map[inc_group_id.id]['debit'] 
+        tcr = group_map[cor_group_id.id]['credit'] 
+
 
         gross_profit = group_map[inc_group_id.id]['balance'] - group_map[cor_group_id.id]['balance']
 
