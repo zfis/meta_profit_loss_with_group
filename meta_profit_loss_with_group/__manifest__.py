@@ -8,7 +8,7 @@
     "author": "Metamorphosis",
     'company': 'Metamorphosis Limited',
     'website': 'metamorphosis.com.bd',
-    "depends": ['account','custom_report','account_group'],
+    "depends": ['account','custom_report','account_group_menu'],
     "data": [
         'views/balance_sheet_report_wizard.xml',
         'views/balance_sheet_report.xml',
@@ -18,7 +18,4 @@
     "installable": True,
     "application": True,
     "auto_install": False,
-    "license": "OPL-1",
-    'price':199.0,
-    'currency':'EUR',     
 }
